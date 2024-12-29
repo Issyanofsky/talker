@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: admin    # Replace with your desired username
+      POSTGRES_PASSWORD: a1a1a1 # Replace with your desired password
+      POSTGRES_DB: sec_db  # Replace with your desired database name
+    ports:
+      - "5432:5432"  # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Mount the volume for persistent storage
+      - ./postgress_db/data.sql:/docker-entrypoint-initdb.d/data.sql  # Mount your data SQL script
+    restart: always
+    networks:
+      - talker-net
+
+  retrive_data:
+      build: /api/retrive_api
+      container_name: retrieve_api_container
+      environment:
+        - FLASK_APP=retrive_api.py
+        - FLASK_ENV=development
+      ports:
+        - "5003:5003"
+      depends_on:
+        - db  # Ensure the Flask app waits for the db to be ready
+      restart: always
+      networks:
+        - talker-net
+
+  add_event:
+      build: /api/add_event_api
+      container_name: add_event_api_container
+      environment:
+        - FLASK_APP=add_event_api.py
+        - FLASK_ENV=development
+      ports:
+        - "5004:5004"
+      depends_on:
+        - db  # Ensure the Flask app waits for the db to be ready
+      restart: always
+      networks:
+        - talker-net
+
+  add_friend:
+      build: /api/add_friend
+      container_name: add_friend_api_container
+      environment:
+        - FLASK_APP=add_friend_api.py
+        - FLASK_ENV=development
+      ports:
+        - "5005:5005"
+      depends_on:
+        - db  # Ensure the Flask app waits for the db to be ready
+      restart: always
+      networks:
+        - talker-net
+
+  web:
+    build: /nginx/.
+    ports:
+      - "8080:80"
+    volumes:
+      - ../nginx/app/.:/usr/share/nginx/html/
+    networks:
+      - talker-net
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./postgress_db/db  # This is relative to the directory containing the `docker-compose.yml`
+      o: bind
+
+networks:
+  talker-net:
+    driver: bridge

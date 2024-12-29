@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app/.:/usr/share/nginx/html/
+    networks:
+      - talker-net
+
+networks:
+  talker-net:
+    driver: bridge
