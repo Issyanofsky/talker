@@ -1,0 +1,9 @@
+apiVersion: v2
+name: talker
+description: A Helm chart for Kubernetes. deploying a Talker app on Flask(api) and PostgreSQL-based application with Nginx
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0"

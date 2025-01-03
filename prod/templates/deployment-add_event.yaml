@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: add-event-api-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.addEvent.replicaCount }}
+  selector:
+    matchLabels:
+      app: add-event-api
+  template:
+    metadata:
+      labels:
+        app: add-event-api
+    spec:
+      restartPolicy: {{ .Values.addEvent.restartPolicy }}
+      containers:
+        - name: add-event-api
+          image: {{ .Values.addEvent.image }}
+          env:
+            - name: FLASK_APP
+              value: {{ .Values.addEvent.flaskApp }}
+            - name: FLASK_ENV
+              value: "development"
+          ports:
+            - containerPort: {{ .Values.addEvent.port }}
+

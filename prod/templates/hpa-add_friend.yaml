@@ -1,0 +1,16 @@
+{{- if .Values.addFriend.hpa.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Release.Name }}-retrive-data-hpa
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: retrive-data-api
+  minReplicas: {{ .Values.addFriend.hpa.minReplicas }}
+  maxReplicas: {{ .Values.addFriend.hpa.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.addFriend.hpa.targetCPUUtilizationPercentage }}
+
+{{- end }}

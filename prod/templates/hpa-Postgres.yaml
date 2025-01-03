@@ -1,0 +1,16 @@
+{{- if .Values.db.hpa.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Release.Name }}-db-hpa
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: db
+  minReplicas: {{ .Values.db.hpa.minReplicas }}
+  maxReplicas: {{ .Values.db.hpa.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.db.hpa.targetCPUUtilizationPercentage }}
+
+{{- end }}

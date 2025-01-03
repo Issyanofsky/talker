@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-nginx-pv
+  namespace: talker-dev
+spec:
+  capacity:
+    storage: 10Gi  
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany  # NFS supports ReadWriteMany access mode
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-nginx-class
+  nfs:
+    path: /data/html  # The NFS directory for Nginx
+    server:  {{ .Values.nginx.persistence.volumeClaimTemplate.spec.nfsServer }}  #  NFS server address

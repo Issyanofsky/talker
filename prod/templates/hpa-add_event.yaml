@@ -1,0 +1,16 @@
+{{- if .Values.addEvent.hpa.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Release.Name }}-retrive-data-hpa
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: add-event-api
+  minReplicas: {{ .Values.addEvent.hpa.minReplicas }}
+  maxReplicas: {{ .Values.addEvent.hpa.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.addEvent.hpa.targetCPUUtilizationPercentage }}
+
+{{- end }}

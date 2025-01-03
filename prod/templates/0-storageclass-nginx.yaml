@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-nginx-class
+provisioner: kubernetes.io/nfs  # NFS provisioner
+parameters:
+  server: {{ .Values.nginx.persistence.volumeClaimTemplate.spec.nfsServer }}  #  NFS server address
+  path: /data/html        # The NFS path

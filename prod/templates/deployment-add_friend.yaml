@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addfriend-api-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.addFriend.replicaCount }}
+  selector:
+    matchLabels:
+      app: addfriend-api
+  template:
+    metadata:
+      labels:
+        app: addfriend-api
+    spec:
+      restartPolicy: {{ .Values.addFriend.restartPolicy }}
+      containers:
+        - name: addfriend-api
+          image: {{ .Values.addFriend.image }}
+          env:
+            - name: FLASK_APP
+              value: {{ .Values.addFriend.flaskApp }}
+            - name: FLASK_ENV
+              value: "development"
+          ports:
+            - containerPort: {{ .Values.addFriend.port }}
+
+

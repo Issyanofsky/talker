@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retrive-data-api-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.retriveData.replicaCount }}
+  selector:
+    matchLabels:
+      app: retrive-data-api
+  template:
+    metadata:
+      labels:
+        app: retrive-data-api
+    spec:
+      restartPolicy: {{ .Values.retriveData.restartPolicy }}
+      containers:
+        - name: retrive-data-api
+          image: {{ .Values.retriveData.image }}
+          env:
+            - name: FLASK_APP
+              value: {{ .Values.retriveData.flaskApp }}
+            - name: FLASK_ENV
+              value: "development"
+          ports:
+            - containerPort: {{ .Values.retriveData.port }}
+

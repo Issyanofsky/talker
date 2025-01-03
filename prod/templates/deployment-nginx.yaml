@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas:  {{ .Values.nginx.replicaCount }}
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      restartPolicy: {{ .Values.nginx.restartPolicy }}
+      containers:
+        - name: nginx
+          image: {{ .Values.nginx.image }}
+          volumeMounts:
+            - name: nginx-html
+              mountPath: {{ .Values.nginx.volumeMountPath }}
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: certs
+              mountPath: /etc/nginx/ssl
+              readOnly: true
+          ports:
+            - containerPort: {{ .Values.nginx.port }}
+            - containerPort: 443
+      volumes:
+        - name: nginx-html
+          persistentVolumeClaim:
+            claimName: nginx-pvc
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: certs
+          secret:
+            secretName: nginx-tls-secret

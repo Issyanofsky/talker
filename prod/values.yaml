@@ -1,0 +1,137 @@
+# values.yaml
+
+namespace: talker-dev
+
+# Ingress
+ingress:
+    enabled: true
+    host: issy.site
+# test connection
+service:
+  port: 80
+certbot:
+  size: 1Gi # pvc and pv size
+# General Configuration for Postgres (db)
+db:
+  image: postgres:13
+  postgresUser: admin
+  postgresPassword: a1a1a1
+  postgresDb: sec_db
+  port: 5432
+  persistence:
+    enabled: true
+    storageClass: "postgress-pv"
+    size: 10Gi
+    volumeClaimTemplate:
+      spec:
+        nfsServer: 192.168.1.165 #IP of nfs server
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 10Gi
+        volumeMode: Filesystem
+  initSqlFile: ./postgress_db/data.sql
+
+  # Replicas configuration
+  replicaCount: 1  # Number of replicas for PostgreSQL
+
+  restartPolicy: Always # can chose from Always, Never, OnFailure
+
+  # Horizontal Pod Autoscaler (HPA) configuration
+  hpa:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+
+retriveData:
+  image: "ecyanofsky/talker-retrive-data:1.8"
+  port: 5003
+  flaskApp: retrive_api.py
+
+  replicaCount: 1
+  restartPolicy: Always # can chose from Always, Never, OnFailure
+  hpa:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 75
+
+addEvent:
+  image: "ecyanofsky/talker-add-event:1.1"  # Replace with actual Flask image name
+  port: 5004
+  flaskApp: add_event_api.py
+
+  replicaCount: 1  # Adjust the number of replicas
+  restartPolicy: Always # can chose from Always, Never, OnFailure
+  hpa:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 75
+
+addFriend:
+  image: "ecyanofsky/talker-add-friend:1.1"  # Replace with actual Flask image name
+  port: 5005
+  flaskApp: add_friend_api.py
+
+  replicaCount: 1  # Adjust the number of replicas
+  restartPolicy: Always # can chose from Always, Never, OnFailure
+  hpa:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 75
+
+# Nginx Service Configuration
+nginx:
+  image: nginx
+  port: 80
+  volumeMountPath: /usr/share/nginx/html  # Path where Nginx will serve static files
+  persistence:
+    enabled: true
+    storageClass: "nginx-pv"
+    size: 5Gi
+    volumeClaimTemplate:
+      spec:
+        nfsServer: 192.168.1.165 #IP of nfs server
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 5Gi
+        volumeMode: Filesystem
+  localPath: ../nginx/app/
+
+  # Replicas configuration
+  replicaCount: 1  # 2 replicas for nginx, if you want HA for your web service
+  restartPolicy: Always # can chose from Always, Never, OnFailure
+  # Horizontal Pod Autoscaler (HPA)
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 75
+
+# Global settings
+global:
+  # Enable or disable the use of liveness and readiness probes
+  livenessProbe:
+    enabled: false
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 3
+    timeoutSeconds: 5
+
+  readinessProbe:
+    enabled: false
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 3
+    timeoutSeconds: 5
+
+  # Affinity settings to ensure pods are scheduled on appropriate nodes
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
