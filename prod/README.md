@@ -1,4 +1,4 @@
-<p align="center">#**Talket**</p>
+#<p align="center">**Talket**</p>
 
 
 this helm deploy the Talker app.
