@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Friend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 300px;
+        }
+        .popup input, .popup textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .popup button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #218838;
+        }
+        .show-popup-button {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .show-popup-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Button to open the popup form -->
+    <button class="show-popup-button" onclick="openPopup()">Add Friend</button>
+
+    <!-- The Popup Form -->
+    <div class="popup" id="popupForm">
+        <h3>Add a New Friend</h3>
+        <form id="addFriendForm">
+            <input type="text" id="phone_number" name="phone_number" required placeholder="Phone Number">
+            <input type="text" id="name" name="name" placeholder="Friend's Name (Optional)">
+            <input type="text" id="surname" name="surname" placeholder="Friend's Surname (Optional)">
+            <textarea id="address" name="address" placeholder="Address (Optional)"></textarea>
+            <input type="date" id="birthday" name="birthday" placeholder="Birthday (Optional)">
+            <textarea id="remark" name="remark" placeholder="Remark (Optional)"></textarea>
+            <button type="submit">Add Friend</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById('popupForm').style.display = 'block';
+        }
+
+        document.getElementById('addFriendForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let phoneNumber = document.getElementById('phone_number').value;
+            let name = document.getElementById('name').value;
+            let surname = document.getElementById('surname').value;
+            let address = document.getElementById('address').value;
+            let birthday = document.getElementById('birthday').value;
+            let remark = document.getElementById('remark').value;
+
+            fetch('http://localhost:5005/add_friend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    phone_number: phoneNumber,
+                    name: name,
+                    surname: surname,
+                    address: address,
+                    birthday: birthday,
+                    remark: remark
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let messageElement = document.getElementById('responseMessage');
+                if (data.status === 'success') {
+                    messageElement.style.color = 'green';
+                    messageElement.textContent = 'Friend added successfully!';
+                    document.getElementById('addFriendForm').reset();
+                } else {
+                    messageElement.style.color = 'red';
+                    messageElement.textContent = 'Error: ' + data.message;
+                }
+            })
+            .catch(error => {
+                let messageElement = document.getElementById('responseMessage');
+                messageElement.style.color = 'red';
+                messageElement.textContent = 'An error occurred!';
+            });
+        });
+    </script>
+
+</body>
+</html>

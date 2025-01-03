@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        /* General body and page styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container to hold the form and result */
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        /* Title and description */
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Input fields and select dropdown */
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Result output styling */
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Error message styling */
+        .error {
+            color: #FF5722;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <p>Enter the amount, select currencies, and click 'Convert' to get the result.</p>
+
+        <!-- Input for the amount to convert -->
+        <input type="number" id="number" value="1" min="0" step="any" placeholder="Amount to convert" required><br>
+
+        <!-- First currency selection -->
+        <label for="currency1">Convert from Currency:</label>
+        <select id="currency1">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="ILS">ILS</option>
+            <option value="MXN">MXN</option>
+            <option value="CAD">CAD</option>
+        </select><br><br>
+
+        <!-- Second currency selection -->
+        <label for="currency2">Convert to Currency:</label>
+        <select id="currency2">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="ILS">ILS</option>
+            <option value="MXN">MXN</option>
+            <option value="CAD">CAD</option>
+        </select><br><br>
+
+        <!-- Button to submit the data -->
+        <button onclick="submitData()">Convert</button>
+
+        <!-- Result output -->
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        // Function to update the second currency options
+        function updateCurrencyOptions() {
+            let currency1 = document.getElementById('currency1').value;
+            let currency2 = document.getElementById('currency2');
+
+            // Enable all options first
+            for (let option of currency2.options) {
+                option.disabled = false;
+            }
+
+            // Disable the selected first currency in the second currency dropdown
+            for (let option of currency2.options) {
+                if (option.value === currency1) {
+                    option.disabled = true;
+                }
+            }
+        }
+
+        // Function to handle the form submission
+        function submitData() {
+            let number = document.getElementById('number').value;
+            let currency1 = document.getElementById('currency1').value;
+            let currency2 = document.getElementById('currency2').value;
+
+            // Make sure the number is valid
+            if (!number || isNaN(number) || number <= 0) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            // Create the data object to send to the API
+            let data = {
+                number: parseFloat(number),
+                currency1: currency1,
+                currency2: currency2
+            };
+
+            // Send the POST request to the Flask API
+            fetch('http://127.0.0.1:5001/multiply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result && data.rate) {
+                    let formattedResult = data.result.toFixed(2);
+                    document.getElementById('result').textContent = `Converted amount: ${formattedResult} ${currency2} (Rate: ${data.rate})`;
+                } else {
+                    document.getElementById('result').textContent = `Error: ${data.error || "Unknown error"}`;
+                    document.getElementById('result').classList.add('error');
+                }
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = `Error: ${error.message || "Unknown error"}`;
+                document.getElementById('result').classList.add('error');
+            });
+        }
+
+        // Event listeners to update currency options whenever the first currency changes
+        document.getElementById('currency1').addEventListener('change', updateCurrencyOptions);
+        // Initialize options on page load
+        updateCurrencyOptions();
+    </script>
+</body>
+</html>
