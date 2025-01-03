@@ -24,6 +24,7 @@ on a name space - Talker_dev:
 *ARGO-CD:*
    the app (talker) is deployed on ARGO-CD.
    to access:
+   
             'kubectl port-forward svc/argo-cd-argocd-server 8080:80 -n argocd'
    
             'http://localhost:8080'
