@@ -11,18 +11,18 @@ on a name space - Talker_dev:
 
    nginx load a image from dockerhub (standart nginx) and load a nginx.conf setting that are at the files directory.
 
-##*postgress:*
+##*postgress:*##
     the app has a sql database. the data is on the nfs server (/data/db folder) for keeping the data consistency.
     db name : sec_db
 
-##*nginx:*
+##*nginx:*##
     the app  uses nginx web server. the data is on the nfs server (/data/html).
     in folder files there is the index.html (should place on /usr/share/nginx/html).
 
-##*HTTPS:*
+##*HTTPS:*##
    this app work in HTTPS ensuring secure webpage. the certificate is kept in a secret (ingress pull it and publish it)
 
-##*ARGO-CD:*
+##*ARGO-CD:*##
    the app (talker) is deployed on ARGO-CD.
    to access:
    
