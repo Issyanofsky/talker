@@ -4,10 +4,10 @@
 this helm deploy the Talker app.
 on a name space - Talker_dev:
 
- helm upgrade --install -n talker-dev --create-namespace talker -f value.yaml .
+             'helm upgrade --install -n talker-dev --create-namespace talker -f value.yaml .'
  
 *delete:*
-   helm delete -n talker-dev talker
+             'helm delete -n talker-dev talker'
 
    nginx load a image from dockerhub (standart nginx) and load a nginx.conf setting that are at the files directory.
 
@@ -24,6 +24,8 @@ on a name space - Talker_dev:
 *ARGO-CD:*
    the app (talker) is deployed on ARGO-CD.
    to access:
-   kubectl port-forward svc/argo-cd-argocd-server 8080:80 -n argocd
-   http://localhost:8080
+            'kubectl port-forward svc/argo-cd-argocd-server 8080:80 -n argocd'
+   
+            'http://localhost:8080'
+   
 
