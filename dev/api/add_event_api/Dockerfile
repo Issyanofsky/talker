@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the application code into the container
-COPY add-event_api.py /app/add-event_api.py
+COPY add_event_api.py /app/add_event_api.py
 
 # Copy the requirements.txt into the container
 COPY requirements.txt /app/requirements.txt
@@ -17,4 +17,4 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 EXPOSE 5004
 
 # Command to run the Flask app
-CMD ["python", "add-event_api.py"]
+CMD ["python", "add_event_api.py"]
