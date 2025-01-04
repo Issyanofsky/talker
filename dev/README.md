@@ -10,9 +10,9 @@ on pushing a new content, it start a CI process [Git Action Workflow](/.github/w
 it will push it to production automaticaly.
 
 testing:
-- API (Flask) test - are done by a python script in the test folder that check the API by
+- API (Flask) test - are done by a python script in the test folder that check the API by:
     - checks that the HTTP response code is 200.
     - checks if the response data (the body of the response) matches the expected string (eg."Welcome to the add_event API!").
-    - ensures that your Python code follows proper style guidelines (PEP 8) .
+    - ensures that the Python code follows proper style guidelines (PEP 8).
 
 - HTML test - 
