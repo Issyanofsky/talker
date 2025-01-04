@@ -1,15 +1,18 @@
-import requests
+import unittest
+from app import app  # Import your Flask app here
 
-def test_home_route():
-    # Send a GET request to your Flask API home route
-    response = requests.get('http://localhost:5004/')  
+class FlaskAppTestCase(unittest.TestCase):
+    
+    # Set up the test client
+    def setUp(self):
+        self.app = app.test_client()
+        self.app.testing = True  # Enable testing mode for Flask
 
-    # Check that the response status code is 200 (OK)
-    assert response.status_code == 200
+    # Test the home route
+    def test_home(self):
+        response = self.app.get('/')  # Make a GET request to the home route
+        self.assertEqual(response.status_code, 200)  # Ensure the status code is 200 (OK)
+        self.assertEqual(response.data.decode(), "Welcome to the add_event API!")  # Ensure the response is correct
 
-    # Check that the response body contains the expected message
-    assert response.text == "Welcome to the add_event API!"
-
-# Run the test
-if __name__ == "__main__":
-    test_home_route()
+if __name__ == '__main__':
+    unittest.main()
