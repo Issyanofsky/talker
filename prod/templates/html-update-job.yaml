@@ -18,8 +18,8 @@ spec:
                 - |
                   apk update
                   apk add git
-                  git clone https://github.com/your-username/your-repository.git /tmp/repo
-                  rsync -av --delete /tmp/repo/ /mnt/nfs/  # Sync to the NFS mount point
+                  git clone https://github.com/Issyanofsky/talker.git /tmp/repo
+                  rsync -av --delete /tmp/repo/prod/nginxhtml /mnt/nfs/  # Sync to the NFS mount point
               volumeMounts:
                 - name: nfs-volume
                   mountPath: /mnt/nfs  # Mount the NFS volume at /mnt/nfs in the container
