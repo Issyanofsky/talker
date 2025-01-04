@@ -1,7 +1,8 @@
 # <p align="center">**Talker**</p>
 
 
-this helm deploy the Talker app.
+deploying the app on the production side (k8s). deploy the "Talker" app using helm chart.
+
 on a name space - Talker_dev:
 
              'helm upgrade --install -n talker-dev --create-namespace talker -f value.yaml .'
