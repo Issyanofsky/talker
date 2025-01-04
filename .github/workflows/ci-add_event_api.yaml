@@ -39,3 +39,23 @@ jobs:
       - name: Run Flask API Test for add_event_api
         run: |
           python -m unittest dev/api/add_event_api/test/test_add_event_api.py
+
+      # Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ecyanofsky/talker-add-event:latest -f dev/api/add_event_api/Dockerfile dev/api/add_event_api/
+
+      # Test the Docker image (ensure it works correctly)
+      - name: Run Docker container to test image
+        run: |
+          docker run -d -p 5004:5004 ecyanofsky/talker-add-event:latest
+          sleep 5  # Give it a few seconds to start the Flask app
+          curl -f http://localhost:5004/  # Make sure it responds correctly
+        continue-on-error: false  # Allow this step to fail if needed
+
+      # Push Docker image to Docker Hub (if test passes)
+      - name: Push Docker image to Docker Hub
+        if: success()  # Only push if previous steps are successful
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker ecyanofsky/talker-add-event:latest
