@@ -19,7 +19,7 @@ spec:
       restartPolicy: {{ .Values.addFriend.restartPolicy }}
       containers:
         - name: addfriend-api
-          image: {{ .Values.addFriend.image }}:{{ .Values.addEvent.tag }}
+          image: "{{ .Values.addFriend.image }}:{{ .Values.addEvent.tag }}"
           env:
             - name: FLASK_APP
               value: {{ .Values.addFriend.flaskApp }}
