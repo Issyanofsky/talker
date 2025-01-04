@@ -4,7 +4,7 @@ metadata:
   name: add-event-api-deployment
   namespace: {{ .Values.namespace }}
   annotations:
-    argocd-image-updater.argoproj.io/image-list: "{{ .Values.addEvent.image }}:1.x"  # 'latest' versioning is not used, so we use a wildcard to match versioned tags.
+    argocd-image-updater.argoproj.io/image-list: "{{ .Values.addEvent.image }}[:1.x]"
     argocd-image-updater.argoproj.io/my-app.update-strategy: semver
 spec:
   replicas: {{ .Values.addEvent.replicaCount }}
