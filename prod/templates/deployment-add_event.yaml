@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: add-event-api-deployment
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: ecyanofsky/talker-add-event
+    argocd-image-updater.argoproj.io/my-app: "latest"
 spec:
   replicas: {{ .Values.addEvent.replicaCount }}
   selector:
