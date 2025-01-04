@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: retrive-data-api-deployment
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "{{ .Values.addEvent.image }}:{{ .Values.addEvent.tag }}"
+    argocd-image-updater.argoproj.io/my-app.update-strategy: semver
 spec:
   replicas: {{ .Values.retriveData.replicaCount }}
   selector:
@@ -16,7 +19,7 @@ spec:
       restartPolicy: {{ .Values.retriveData.restartPolicy }}
       containers:
         - name: retrive-data-api
-          image: {{ .Values.retriveData.image }}
+          image: {{ .Values.retriveData.image }}:{{ .Values.addEvent.tag }}
           env:
             - name: FLASK_APP
               value: {{ .Values.retriveData.flaskApp }}
