@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     argocd-image-updater.argoproj.io/image-list: ecyanofsky/talker-add-event
-    argocd-image-updater.argoproj.io/my-app: "latest"
+    argocd-image-updater.argoproj.io/my-app: 1.x
 spec:
   replicas: {{ .Values.addEvent.replicaCount }}
   selector:
