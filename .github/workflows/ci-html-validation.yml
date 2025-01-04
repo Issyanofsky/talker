@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'dev/htmlfile/**'
+  workflow_dispatch:  # Allow manual triggering of the workflow
   
 jobs:
   validate_html_files:
