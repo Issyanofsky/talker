@@ -120,6 +120,7 @@ nginx:
 # CD setting for HTML file to load into nfs sever
 git-sync-to-nfs:
     schedule: "*/5 * * * *"
+    git: "ecyanofsky/talker-add-friend"
 
 # Global settings
 global:
