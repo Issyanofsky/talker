@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default  # Optional: defines the Argo CD project
   source:
-    repoURL: 'https://github.com/your-org/your-repo.git'  # Git repository where the app manifests are stored
+    repoURL: 'https://github.com/Issyanofsky/talker.git'
     targetRevision: 'main'
     path: 'prod/templates' 
   destination:
