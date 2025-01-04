@@ -58,7 +58,7 @@ jobs:
         if: success()  # Only push if previous steps are successful
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker ecyanofsky/talker-add-event:latest
+          docker push ecyanofsky/talker-add-event:latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
