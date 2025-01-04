@@ -117,6 +117,10 @@ nginx:
     maxReplicas: 3
     targetCPUUtilizationPercentage: 75
 
+# CD setting for HTML file to load into nfs sever
+git-sync-to-nfs:
+    
+
 # Global settings
 global:
   # Enable or disable the use of liveness and readiness probes
