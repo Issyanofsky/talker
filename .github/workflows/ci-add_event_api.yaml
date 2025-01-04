@@ -59,3 +59,11 @@ jobs:
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
           docker ecyanofsky/talker-add-event:latest
+
+      # Cleanup Docker images and containers
+      - name: Docker Cleanup
+        run: |
+          docker container prune -f  # Remove stopped containers
+          docker image prune -f  # Remove unused images
+          docker volume prune -f  # Remove unused volumes
+          docker system prune -f  # Clean up everything unused (containers, images, networks, volumes)
