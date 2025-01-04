@@ -20,7 +20,7 @@ spec:
                   apk add git
                   apk add git rsync
                   git clone "{{ .Values.gitsynctonfs.git }}" /tmp/repo
-                  rsync -av --delete /tmp/repo/prod/nginxhtml /mnt/nfs/  # Sync to the NFS mount point
+                  rsync -av --delete /tmp/repo/prod/nginxhtml/ /mnt/nfs/  # Sync to the NFS mount point
               volumeMounts:
                 - name: nfs-volume
                   mountPath: /mnt/nfs  # Mount the NFS volume at /mnt/nfs in the container
