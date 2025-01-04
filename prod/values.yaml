@@ -118,7 +118,7 @@ nginx:
     targetCPUUtilizationPercentage: 75
 
 # CD setting for HTML file to load into nfs sever
-git-sync-to-nfs:
+gitsynctonfs:
     schedule: "*/5 * * * *"
     git: "https://github.com/Issyanofsky/talker.git"
 
