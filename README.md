@@ -8,4 +8,6 @@ the start of the CI/CD pipline till deploying on the production side.
 ### folder content:
     
 * dev folder - has the developer scripts.
-* prod folder - helm for deploying the app on the production side (k8s).deploy the "Talker" app. for more details [prod README.md](prod/README.md)
+* prod folder - helm for deploying the app on the production side (k8s).deploy the "Talker" app. for more details [prod README.md](prod/README.md).
+  the CD process is a  Continuous Deployment. it trigger by new image pushed to dockerhub (tag latest) and deploy it automaticaly into the production for the
+  Flask api. and for the html (hosted on nginx) it triger by pushing new files into github repository (/prod/nginxhtml).
