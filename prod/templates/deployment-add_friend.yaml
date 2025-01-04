@@ -4,7 +4,7 @@ metadata:
   name: addfriend-api-deployment
   namespace: {{ .Values.namespace }}
   annotations:
-    argocd-image-updater.argoproj.io/image-list: "{{ .Values.addEvent.image }}:1.x"
+    argocd-image-updater.argoproj.io/image-list: "{{ .Values.addFriend.image }}:1.x"
     argocd-image-updater.argoproj.io/my-app.update-strategy: "semver"
 spec:
   replicas: {{ .Values.addFriend.replicaCount }}
@@ -19,7 +19,7 @@ spec:
       restartPolicy: {{ .Values.addFriend.restartPolicy }}
       containers:
         - name: addfriend-api
-          image: "{{ .Values.addFriend.image }}:{{ .Values.addEvent.tag }}"
+          image: "{{ .Values.addFriend.image }}:{{ .Values.addFriend.tag }}"
           env:
             - name: FLASK_APP
               value: {{ .Values.addFriend.flaskApp }}
