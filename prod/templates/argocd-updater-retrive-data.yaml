@@ -1,1 +1,21 @@
-
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: retrive-data-api  
+  namespace: argocd     
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "ecyanofsky/talker-retrive-data:1.x"
+    argocd-image-updater.argoproj.io/update-strategy: "semver"
+spec:
+  project: default  # Optional: defines the Argo CD project
+  source:
+    repoURL: 'https://github.com/Issyanofsky/talker.git'
+    targetRevision: 'main'
+    path: 'prod/templates' 
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: talker-dev  
+  syncPolicy:
+    automated:  # Automatically sync changes when new commits are detected
+      prune: true  # Optionally prune resources that are no longer defined
+      selfHeal: true  # Optionally enable self-healing of drifted resources
