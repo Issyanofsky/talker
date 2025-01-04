@@ -3,4 +3,4 @@
 ### folder content:
     
 * dev folder - has the developer scripts.
-* prod folder - helm for deploying the app on the production side (k8s).deploy the "Talker" app. fro more details [prod README.md](prod/README.md)
+* prod folder - helm for deploying the app on the production side (k8s).deploy the "Talker" app. for more details [prod README.md](prod/README.md)
