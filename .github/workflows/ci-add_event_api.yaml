@@ -1,1 +1,34 @@
-a
+name: Flask API CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  
+    paths:
+      - 'dev/api/add_event_api/**'  
+
+jobs:
+  # Job for add_event_api
+  test_add_event_api:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Install dependencies for add_event_api
+      - name: Install dependencies for add_event_api
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev/api/add_event_api/requirements.txt  # Adjust path if necessary
+
+      # Run Flask API test for add_event_api
+      - name: Run Flask API Test for add_event_api
+        run: |
+          python dev/api/add_event_api/app.py  # Adjust path if necessary
