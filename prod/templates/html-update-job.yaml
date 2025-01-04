@@ -18,6 +18,7 @@ spec:
                 - |
                   apk update
                   apk add git
+                  apk add git rsync
                   git clone "{{ .Values.git-sync-to-nfs.git }}" /tmp/repo
                   rsync -av --delete /tmp/repo/prod/nginxhtml /mnt/nfs/  # Sync to the NFS mount point
               volumeMounts:
