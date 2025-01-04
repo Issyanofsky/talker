@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: add-event-api-deployment
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "{{ .Values.addEvent.image }}:{{ .Values.addEvent.tag }}"
+    argocd-image-updater.argoproj.io/my-app.update-strategy: semver
 spec:
   replicas: {{ .Values.addEvent.replicaCount }}
   selector:
@@ -16,7 +19,7 @@ spec:
       restartPolicy: {{ .Values.addEvent.restartPolicy }}
       containers:
         - name: add-event-api
-          image: {{ .Values.addEvent.image }}
+          image: "{{ .Values.addEvent.image }}:{{ .Values.addEvent.tag }}"
           env:
             - name: FLASK_APP
               value: {{ .Values.addEvent.flaskApp }}

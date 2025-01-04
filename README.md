@@ -1,3 +1,6 @@
-dev folder is for the developer side.
+# <p align="center">**Talker**</p>
 
-prod folder is the production helm chart for deploying the app "Talker"
+### folder content:
+    
+    * dev folder - has the developer scripts.
+    * prod folder - helm for deploying the app on the production side (k8s).deploy the "Talker" app.
