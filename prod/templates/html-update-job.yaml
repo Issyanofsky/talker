@@ -4,7 +4,7 @@ metadata:
   name: git-sync-to-nfs
   namespace: {{ .Values.namespace }}
 spec:
-  schedule: {{ .Values.git-sync-to-nfs.schedule }}
+  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       template:
