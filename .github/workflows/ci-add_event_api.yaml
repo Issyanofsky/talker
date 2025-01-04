@@ -33,7 +33,7 @@ jobs:
       - name: Run flake8 linter
         run: |
           pip install flake8
-          flake8 --max-line-length=140 dev/api/add_event_api/add-event_api.py  
+          flake8 --max-line-length=140 dev/api/add_event_api/add_event_api.py  
 
       # Run Flask API test for add_event_api (ensure the test script is present and correctly written)
       - name: Run Flask API Test for add_event_api
