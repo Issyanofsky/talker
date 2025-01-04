@@ -5,15 +5,12 @@ on:
     branches:
       - main  
     paths:
-      - 'dev/api/**'
-jobs:
-  test_flask_api:
-    runs-on: ubuntu-latest
+      - 'dev/api/add_event_api/**'  
 
-    strategy:
-      matrix:
-        api_folder:
-          - dev/api/add_event_api
+jobs:
+  # Job for add_event_api
+  test_add_event_api:
+    runs-on: ubuntu-latest
     steps:
       # Checkout the repository
       - name: Checkout Repository
@@ -25,13 +22,13 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Install dependencies
-      - name: Install dependencies
+      # Install dependencies for add_event_api
+      - name: Install dependencies for add_event_api
         run: |
           python -m pip install --upgrade pip
-          pip install -r ${{ matrix.api_folder }}/requirements.txt  # Adjust path as needed
+          pip install -r dev/api/add_event_api/requirements.txt  # Adjust path if necessary
 
-      # Run the Flask API test (or replace this with your test command)
-      - name: Run Flask API Test
+      # Run Flask API test for add_event_api
+      - name: Run Flask API Test for add_event_api
         run: |
-          python ${{ matrix.api_folder }}/app.py  # Replace with your app/script name
+          python dev/api/add_event_api/app.py  # Adjust path if necessary
