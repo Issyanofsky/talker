@@ -46,7 +46,8 @@ db:
     targetCPUUtilizationPercentage: 80
 
 retriveData:
-  image: "ecyanofsky/talker-retrive-data:1.8"
+  image: "ecyanofsky/talker-retrive-data"
+  tag: "latest"
   port: 5003
   flaskApp: retrive_api.py
 
@@ -73,7 +74,7 @@ addEvent:
     targetCPUUtilizationPercentage: 75
 
 addFriend:
-  image: "ecyanofsky/talker-add-friend:1.1"  # Replace with actual Flask image name
+  image: "ecyanofsky/talker-add-friend"  # Replace with actual Flask image name
   tag: "latest"
   port: 5005
   flaskApp: add_friend_api.py
