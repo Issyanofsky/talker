@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: git-sync-to-nfs
+  namespace: default
+spec:
+  schedule: "*/5 * * * *"  # This will run every 5 minutes; adjust as needed
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: git-sync
+              image: alpine:latest  # Small image with Git and rsync installed
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  apk update
+                  apk add git
+                  git clone https://github.com/your-username/your-repository.git /tmp/repo
+                  rsync -av --delete /tmp/repo/ /mnt/nfs/  # Sync to the NFS mount point
+              volumeMounts:
+                - name: nfs-volume
+                  mountPath: /mnt/nfs  # Mount the NFS volume at /mnt/nfs in the container
+          volumes:
+            - name: nfs-volume
+              persistentVolumeClaim:
+                claimName: nginx-pvc  
+          restartPolicy: OnFailure
