@@ -60,7 +60,6 @@ retriveData:
 
 addEvent:
   image: "ecyanofsky/talker-add-event" # Replace with actual Flask image name
-  tag: "1.0"
   port: 5004
   flaskApp: add_event_api.py
 
