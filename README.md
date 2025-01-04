@@ -9,7 +9,7 @@ or any change made on the python script (dev/api...) will be trigger the start o
 ### folder content:
     
 * dev folder - has the developer scripts.
-* prod folder - this is the production folder. the folder contain the deployment of the application and the CD process.
+* prod folder - this is the production folder. the folder contain the deployment of the application and the CD process. for more details [prod README.md](prod/README.md).
 *
 *   helm for deploying the app on the production side (k8s).deploy the "Talker" app. for more details [prod README.md](prod/README.md).
   the CD process is a  Continuous Deployment. it trigger by new image pushed to dockerhub (tag latest) and deploy it automaticaly into the production for the
