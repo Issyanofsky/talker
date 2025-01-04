@@ -15,6 +15,7 @@ testing:
     - checks if the response data (the body of the response) matches the expected string (eg."Welcome to the add_event API!").
     - ensures that the Python code follows proper style guidelines (PEP 8).
     * important: the name of the API cant be changed (the python script)!!.
+    
     if the test pass successfully it wrap the script in an image and push it into the docker repository (you have to create secret
     DOCKER_USERNAME, DOCKER_PASSWORD for DockerHub). the push is done only after a test done to ensure the image works correctly.
 
