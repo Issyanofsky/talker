@@ -12,11 +12,8 @@ jobs:
 
     strategy:
       matrix:
-        # List all your Flask API folders here
         api_folder:
           - dev/api/add_event_api
-          - dev/api/another_flask_api  # Add more APIs if necessary
-
     steps:
       # Checkout the repository
       - name: Checkout Repository
