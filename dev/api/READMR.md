@@ -1,5 +1,3 @@
-this show the data inside the sql
-retrive-api : retrive the data
+# <p align="center">**Talker**</p>
 
-add_event_api
-insert a new event to the database. 
+here is the api Falsk script hosted.. any push to this sub-folder will execute a CI test.
