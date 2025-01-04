@@ -60,6 +60,7 @@ retriveData:
 
 addEvent:
   image: "ecyanofsky/talker-add-event" # Replace with actual Flask image name
+  tag: "latest"
   port: 5004
   flaskApp: add_event_api.py
 
@@ -73,6 +74,7 @@ addEvent:
 
 addFriend:
   image: "ecyanofsky/talker-add-friend:1.1"  # Replace with actual Flask image name
+  tag: "latest"
   port: 5005
   flaskApp: add_friend_api.py
 
