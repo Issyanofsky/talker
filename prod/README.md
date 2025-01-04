@@ -1,4 +1,4 @@
-# <p align="center">**Talker**</p>
+# <p align="center">**Production**</p>
 
 
 deploying the app on the production side (k8s). deploy the "Talker" app using helm chart.
