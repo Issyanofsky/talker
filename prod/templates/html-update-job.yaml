@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: git-sync-to-nfs
-  namespace: default
+  namespace: {{ .Values.namespace }}
 spec:
   schedule: {{ .Values.git-sync-to-nfs.schedule }} 
   jobTemplate:
