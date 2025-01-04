@@ -28,6 +28,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r dev/api/add_event_api/requirements.txt  
 
+      # Example GitHub Actions step to run flake8
+      - name: Run flake8 linter
+        run: |
+          pip install flake8
+          flake8 add-event_api.py  
+
+
       # Run Flask API test for add_event_api
       - name: Run Flask API Test for add_event_api
         run: |
