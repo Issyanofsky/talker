@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: add-friend-api  
+  name: addfriend-api  
   namespace: argocd     
   annotations:
     argocd-image-updater.argoproj.io/image-list: "ecyanofsky/talker-add-friend:1.x"
