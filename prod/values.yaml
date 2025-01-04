@@ -59,7 +59,8 @@ retriveData:
     targetCPUUtilizationPercentage: 75
 
 addEvent:
-  image: "ecyanofsky/talker-add-event:1.1"  # Replace with actual Flask image name
+  image: "ecyanofsky/talker-add-event" # Replace with actual Flask image name
+  tag: 1.x
   port: 5004
   flaskApp: add_event_api.py
 
