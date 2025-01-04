@@ -19,7 +19,7 @@ spec:
       restartPolicy: {{ .Values.retriveData.restartPolicy }}
       containers:
         - name: retrive-data-api
-          image: {{ .Values.retriveData.image }}:{{ .Values.addEvent.tag }}
+          image: "{{ .Values.retriveData.image }}:{{ .Values.addEvent.tag }}"
           env:
             - name: FLASK_APP
               value: {{ .Values.retriveData.flaskApp }}
