@@ -5,7 +5,8 @@ on:
     branches:
       - main  
     paths:
-      - 'dev/api/add_event_api/**'  
+      - 'dev/api/add_event_api/**'
+  workflow_dispatch:  # Allow manual triggering of the workflow
 
 jobs:
   # Job for add_event_api
