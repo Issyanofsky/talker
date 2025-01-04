@@ -30,7 +30,7 @@ on a name space - Talker_dev:
    
             'http://localhost:8080'
    
-  ###CD stage:
+## CD stage:
   
     there are two main updates that can be done:
     - Flask api: update the api of the app by pulling the "latest" image from dockerhub. its done using ARGO-CD auto Updater. 
