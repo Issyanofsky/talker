@@ -30,4 +30,5 @@ on a name space - Talker_dev:
    
             'http://localhost:8080'
    
-
+  Auto Updater:
+    the argo pull any new image post on the dockerhub with the "latest" tag and deply it automaticaly in the production.
