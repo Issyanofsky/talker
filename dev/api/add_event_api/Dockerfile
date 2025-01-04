@@ -7,10 +7,11 @@ WORKDIR /app
 # Copy the application code into the container
 COPY add-event_api.py /app/add-event_api.py
 
-# Install the required dependencies
-RUN pip install --upgrade pip && pip install Flask psycopg2-binary
+# Copy the requirements.txt into the container
+COPY requirements.txt /app/requirements.txt
 
-RUN pip install flask-cors
+# Install the required dependencies
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Expose the port the app will run on
 EXPOSE 5004
