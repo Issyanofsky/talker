@@ -30,5 +30,9 @@ on a name space - Talker_dev:
    
             'http://localhost:8080'
    
-  Auto Updater:
-    the argo pull any new image post on the dockerhub with the "latest" tag and deply it automaticaly in the production.
+  CD stage:
+    there are two main updates that can be done:
+    - Flask api: update the api of the app by pulling the "latest" image from dockerhub. its done using ARGO-CD auto Updater. 
+      the argo pull any new image post on the dockerhub with the "latest" tag and deply it automaticaly in the production.
+    - HTML: update the content of the html files that deployed into the nginx servers (its located on a nfs server). the process 
+      is done my a CronJob that is schudle to pull any new changes made on the folder nginxhtml on the repsitory.
