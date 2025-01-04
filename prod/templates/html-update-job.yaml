@@ -4,7 +4,7 @@ metadata:
   name: git-sync-to-nfs
   namespace: default
 spec:
-  schedule: "*/5 * * * *"  # This will run every 5 minutes; adjust as needed
+  schedule: {{ .Values.git-sync-to-nfs.schedule }} 
   jobTemplate:
     spec:
       template:
