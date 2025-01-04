@@ -3,11 +3,9 @@ name: Flask API CI Pipeline
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
-  pull_request:
-    branches:
-      - main  # Trigger on pull request to main branch
-
+      - main  
+    paths:
+      - 'dev/api/**'
 jobs:
   test_flask_api:
     runs-on: ubuntu-latest
