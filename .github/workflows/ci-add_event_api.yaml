@@ -40,15 +40,32 @@ jobs:
         run: |
           python -m unittest dev/api/add_event_api/test/test_add_event_api.py
 
-      # Build the Docker image
-      - name: Build Docker image
+      # Get the latest tag from Docker Hub (fetch tags using the Docker Hub API)
+      - name: Get latest Docker image tag
+        id: get_tag
         run: |
-          docker build -t ecyanofsky/talker-add-event:latest -f dev/api/add_event_api/Dockerfile dev/api/add_event_api/
+          # Fetch the tags for the image from Docker Hub using curl and jq
+          latest_tag=$(curl -s https://hub.docker.com/v2/repositories/ecyanofsky/talker-add-event/tags | jq -r '.results[0].name')
+          echo "Latest tag is: $latest_tag"
+          # Extract the major and minor parts (e.g., 1.2 -> major=1, minor=2)
+          major_version=$(echo $latest_tag | cut -d. -f1)
+          minor_version=$(echo $latest_tag | cut -d. -f2)
+          # Increment the minor version
+          new_minor_version=$((minor_version + 1))
+          new_tag="${major_version}.${new_minor_version}"
+          echo "New tag is: $new_tag"
+          echo "::set-output name=new_tag::$new_tag"
+
+
+      # Build the Docker image with the new incremented tag
+      - name: Build Docker image with new tag
+        run: |
+          docker build -t ecyanofsky/talker-add-event:${{ steps.get_tag.outputs.new_tag }} -f dev/api/add_event_api/Dockerfile dev/api/add_event_api/
 
       # Test the Docker image (ensure it works correctly)
       - name: Run Docker container to test image
         run: |
-          docker run -d -p 5004:5004 ecyanofsky/talker-add-event:latest
+          docker run -d -p 5004:5004 ecyanofsky/talker-add-event:${{ steps.get_tag.outputs.new_tag }}
           sleep 5  # Give it a few seconds to start the Flask app
           curl -f http://localhost:5004/  # Make sure it responds correctly
         continue-on-error: false  # Allow this step to fail if needed
@@ -58,7 +75,7 @@ jobs:
         if: success()  # Only push if previous steps are successful
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker push ecyanofsky/talker-add-event:latest
+          docker push ecyanofsky/talker-add-event:${{ steps.get_tag.outputs.new_tag }}
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
