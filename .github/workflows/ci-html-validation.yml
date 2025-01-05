@@ -34,5 +34,11 @@ jobs:
       # If HTML check passes, copy files to deployment folder
       - name: Copy HTML files for deployment
         run: |
-          cp dev/htmlfile/*.html prod/nginxhtml/  
-  
+          cp -r dev/htmlfile/*.html prod/nginxhtml/  
+
+      # List the target directory after copying
+      - name: List target directory after copy
+        run: |
+          echo "Listing files in prod/nginxhtml after copy:"
+          ls -alh prod/nginxhtml/
+
