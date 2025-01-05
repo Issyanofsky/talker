@@ -16,11 +16,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Install HTML Linter
-      - name: Install HTML Linter
+      # Install Node.js and npm
+      - name: Install Node.js
         run: |
-          sudo apt-get install -y htmlhint  
+          sudo apt-get update
+          sudo apt-get install -y nodejs npm  # Install Node.js and npm for the HTMLHint to work
 
+      # Install HTML Linter (HTMLHint)
+      - name: Install HTMLHint
+        run: |
+          sudo npm install -g htmlhint
       # Run HTML check (adjust the path to your HTML directory)
       - name: Check HTML files
         run: |
