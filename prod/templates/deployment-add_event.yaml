@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: add-event-api-deployment
   namespace: {{ .Values.namespace }}
-  
 spec:
   replicas: {{ .Values.addEvent.replicaCount }}
   selector:
