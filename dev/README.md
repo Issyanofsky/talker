@@ -18,5 +18,6 @@ testing:
     
     if the test pass successfully it wrap the script in an image and push it into the docker repository (you have to create secret
     DOCKER_USERNAME, DOCKER_PASSWORD for DockerHub). the push is done only after a test done to ensure the image works correctly.
+    the image get new tag automaticaly by incrementing the tag in type 1.x.
 
 - HTML test - 
