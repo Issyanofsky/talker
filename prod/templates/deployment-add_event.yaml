@@ -19,11 +19,7 @@ spec:
       restartPolicy: {{ .Values.addEvent.restartPolicy }}
       containers:
         - name: add-event-api
-          {{- if .Values.image.tag }}
-            image: {{ .Values.addEvent.image }}:{{ .Values.image.tag }}
-          {{- else }}
-            image: {{ .Values.addEvent.image }}:{{ .Values.addEvent.tag }}
-          {{- end }}
+          image: ecyanofsky/talker-add-event:1.2
           env:
             - name: FLASK_APP
               value: {{ .Values.addEvent.flaskApp }}
