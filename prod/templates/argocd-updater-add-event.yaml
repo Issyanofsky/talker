@@ -5,14 +5,15 @@ metadata:
   namespace: argocd     
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: addevent=ecyanofsky/talker-add-event:1.x
+    argocd-image-updater.argoproj.io/image-list: addevent=ecyanofsky/talker-add-event
+    argocd-image-updater.argoproj.io/myalias.force-update: "true"
     argocd-image-updater.argoproj.io/update-strategy: "semver"
 spec:
   project: default  # Optional: defines the Argo CD project
   source:
     repoURL: 'https://github.com/Issyanofsky/talker.git'
     targetRevision: 'main'
-    path: 'prod/templates' 
+    path: prod 
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: talker-dev  
