@@ -4,7 +4,8 @@ metadata:
   name: addfriend-api  
   namespace: argocd     
   annotations:
-    argocd-image-updater.argoproj.io/image-list: "ecyanofsky/talker-add-friend:1.x"
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/image-list: addfriend=ecyanofsky/talker-add-friend:1.x
     argocd-image-updater.argoproj.io/update-strategy: "semver"
 spec:
   project: default  # Optional: defines the Argo CD project
