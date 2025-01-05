@@ -29,7 +29,7 @@ jobs:
       # Run HTML check (adjust the path to your HTML directory)
       - name: Check HTML files
         run: |
-          htmlhint dev/htmlfiles/**/*.html  # Run linter on all .html files in the folder
+          htmlhint dev/htmlfile/**/*.html  # Run linter on all .html files in the folder
 
       # If HTML check passes, copy files to deployment folder
       - name: Copy HTML files for deployment
