@@ -10,6 +10,15 @@ metadata:
     argocd-image-updater.argoproj.io/addEvent.update-strategy: "semver"
     argocd-image-updater.argoproj.io/addFriend.update-strategy: "semver"
     argocd-image-updater.argoproj.io/retriveData.update-strategy: "semver"
+    argocd-image-updater.argoproj.io/addEvent.target-parameters: |
+      - image-name=addEvent.image
+      - image-tag=addEvent.tag
+    argocd-image-updater.argoproj.io/addFriend.target-parameters: |
+      - image-name=addFriend.image
+      - image-tag=addFriend.tag
+    argocd-image-updater.argoproj.io/retriveData.target-parameters: |
+      - image-name=retriveData.image
+      - image-tag=retriveData.tag
 spec:
   project: default  # Optional: defines the Argo CD project
   source:
