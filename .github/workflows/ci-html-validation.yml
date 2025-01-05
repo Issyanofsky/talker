@@ -42,13 +42,21 @@ jobs:
           echo "Listing files in prod/nginxhtml after copy:"
           ls -la prod/nginxhtml/
           
-      # Commit the changes and push back to GitHub
+       # Commit and push changes back to GitHub
       - name: Commit and push changes
         run: |
+          # Set Git config (this allows the commit to be attributed to a user)
           git config --global user.name "Issyanofsky"
           git config --global user.email "ecyanofsky@gmail.com"
+          
+          # Stage the changes
           git add prod/nginxhtml/*.html  # Add the copied files to the staging area
-          git commit -m "Copied HTML files to prod/nginxhtml"  # Commit the changes
-          git push origin main  # Push the changes to the main branch
+          
+          # Commit the changes
+          git commit -m "Copied HTML files to prod/nginxhtml by GitAction pipline"  # Provide a commit message
+          
+          # Push the changes back to the repository
+          git push origin main  # Push to the 'main' branch
+
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
