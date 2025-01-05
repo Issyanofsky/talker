@@ -1,5 +1,5 @@
 import unittest
-from dev.api.add_event_api.add_event_api import app  # Import the  add-event_api.py Flask 
+from dev.api.add_friend.add_event_api import app  # Import the  add-event_api.py Flask 
 
 class FlaskAppTestCase(unittest.TestCase):
     
