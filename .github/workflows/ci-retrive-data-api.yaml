@@ -1,0 +1,89 @@
+name: Flask API CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dev/api/retrive_api/**'
+  workflow_dispatch:  # Allow manual triggering of the workflow
+
+jobs:
+  # Job for add_event_api
+  test_add_event:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Install dependencies for add_event_api
+      - name: Install dependencies for add_event_api
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev/api/retrive_api/requirements.txt  
+
+      # Example GitHub Actions step to run flake8
+      - name: Run flake8 linter
+        run: |
+          pip install flake8
+          flake8 --max-line-length=140 dev/api/retrive_api/retrive_api.py  
+
+      # Run Flask API test for add_event_api (ensure the test script is present and correctly written)
+      - name: Run Flask API Test for add_friend
+        run: |
+          python -m unittest dev/api/retrive_api/test/test_retrive_data_api.py
+
+      # Get the latest tag from Docker Hub (fetch tags using the Docker Hub API)
+      - name: Get latest Docker image tag
+        id: get_tag
+        run: |
+          # Fetch the tags for the image from Docker Hub using curl and jq
+          latest_tag=$(curl -s https://hub.docker.com/v2/repositories/ecyanofsky/talker-retrive-data/tags | jq -r '.results[0].name')
+          echo "Latest tag is: $latest_tag"
+          # Extract the major and minor parts (e.g., 1.2 -> major=1, minor=2)
+          major_version=$(echo $latest_tag | cut -d. -f1)
+          minor_version=$(echo $latest_tag | cut -d. -f2)
+          # Increment the minor version
+          new_minor_version=$((minor_version + 1))
+          new_tag="${major_version}.${new_minor_version}"
+          echo "New tag is: $new_tag"
+          echo "::set-output name=new_tag::$new_tag"
+
+
+      # Build the Docker image with the new incremented tag
+      - name: Build Docker image with new tag
+        run: |
+          docker build -t ecyanofsky/talker-retrive-data:${{ steps.get_tag.outputs.new_tag }} -f dev/api/retrive_api/Dockerfile dev/api/retrive_api/
+
+      # Test the Docker image (ensure it works correctly)
+      - name: Run Docker container to test image
+        run: |
+          docker run -d -p 5004:5004 ecyanofsky/talker-retrive-data:${{ steps.get_tag.outputs.new_tag }}
+          sleep 5  # Give it a few seconds to start the Flask app
+          curl -f http://localhost:5003/  # Make sure it responds correctly
+        continue-on-error: false  # Allow this step to fail if needed
+
+      # Push Docker image to Docker Hub (if test passes)
+      - name: Push Docker image to Docker Hub
+        if: success()  # Only push if previous steps are successful
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push ecyanofsky/talker-retrive-data:${{ steps.get_tag.outputs.new_tag }}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Cleanup Docker images and containers
+      - name: Docker Cleanup
+        run: |
+          docker container prune -f  # Remove stopped containers
+          docker image prune -f  # Remove unused images
+          docker volume prune -f  # Remove unused volumes
+          docker system prune -f  # Clean up everything unused (containers, images, networks, volumes)
