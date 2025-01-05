@@ -13,6 +13,10 @@ DB_SETTINGS = {
     "password": "a1a1a1"
 }
 
+# Basic home route
+@app.route('/')
+def home():
+    return "Welcome to the Retrive API!"  # or render a homepage or documentation page
 
 # Route to handle requests with path parameters
 @app.route('/friend/<phone_number>', methods=['GET'])
