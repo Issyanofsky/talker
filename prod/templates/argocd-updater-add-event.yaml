@@ -5,7 +5,10 @@ metadata:
   namespace: argocd     
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: addEvent=ecyanofsky/talker-add-event:1.x, addFriend=ecyanofsky/talker-add-friend:1.x, retriveData=ecyanofsky/talker-retrive-data:1.x
+    argocd-image-updater.argoproj.io/image-list: |
+      addEvent=ecyanofsky/talker-add-event:1.x
+      addFriend=ecyanofsky/talker-add-friend:1.x
+      retriveData=ecyanofsky/talker-retrive-data:1.x
     argocd-image-updater.argoproj.io/myalias.force-update: "true"
     argocd-image-updater.argoproj.io/addEvent.update-strategy: "semver"
     argocd-image-updater.argoproj.io/addFriend.update-strategy: "semver"
@@ -19,6 +22,14 @@ metadata:
     argocd-image-updater.argoproj.io/retriveData.target-parameters: |
       - image-name=retriveData.image
       - image-tag=retriveData.tag
+    
+    argocd-image-updater.argoproj.io/addEvent.helm.image-name: addEvent.image
+    argocd-image-updater.argoproj.io/addEvent.helm.image-tag: addEvent.tag
+    argocd-image-updater.argoproj.io/addFriend.helm.image-name: addFriend.image
+    argocd-image-updater.argoproj.io/addFriend.helm.image-tag: addFriend.tag
+    argocd-image-updater.argoproj.io/retriveData.helm.image-name: retriveData.image
+    argocd-image-updater.argoproj.io/addEretriveDatavent.helm.image-tag: retriveData.tag
+
 spec:
   project: default  # Optional: defines the Argo CD project
   source:
