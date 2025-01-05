@@ -19,7 +19,7 @@ jobs:
       # Install HTML Linter
       - name: Install HTML Linter
         run: |
-          sudo apt-get install -y htmlhint  # Example: You can replace with another linter if needed
+          sudo apt-get install -y htmlhint  
 
       # Run HTML check (adjust the path to your HTML directory)
       - name: Check HTML files
@@ -29,13 +29,5 @@ jobs:
       # If HTML check passes, copy files to deployment folder
       - name: Copy HTML files for deployment
         run: |
-          cp dev/htmlfiles/*.html /path/to/deployment/folder/  # Adjust path to deployment folder
-
-      # Commit and push the changes to GitHub (optional)
-      - name: Commit HTML changes
-        run: |
-          git config --global user.name "Your Name"
-          git config --global user.email "youremail@example.com"
-          git add .
-          git commit -m "Update HTML files for deployment"
-          git push
+          cp dev/htmlfiles/*.html /prod/nginxhtml/  
+  
