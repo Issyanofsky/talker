@@ -40,5 +40,5 @@ jobs:
       - name: List target directory after copy
         run: |
           echo "Listing files in prod/nginxhtml after copy:"
-          ls -alh prod/nginxhtml/
+          ls -la prod/nginxhtml/
 
