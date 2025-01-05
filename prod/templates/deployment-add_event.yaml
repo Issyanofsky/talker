@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: add-event-api-deployment
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: addEvent=ecyanofsky/talker-add-event:1.x
+    argocd-image-updater.argoproj.io/update-strategy: "semver"
 spec:
   replicas: {{ .Values.addEvent.replicaCount }}
   selector:
@@ -16,7 +19,11 @@ spec:
       restartPolicy: {{ .Values.addEvent.restartPolicy }}
       containers:
         - name: add-event-api
-          image: {{ .Values.addEvent.image }}:{{ .Values.addEvent.tag }}
+          {{- if .Values.image.tag }}
+            image: {{ .Values.addEvent.image }}:{{ .Values.image.tag }}
+          {{- else }}
+            image: {{ .Values.addEvent.image }}:{{ .Values.addEvent.tag }}
+          {{- end }}
           env:
             - name: FLASK_APP
               value: {{ .Values.addEvent.flaskApp }}
