@@ -12,7 +12,7 @@ class FlaskAppTestCase(unittest.TestCase):
     def test_home(self):
         response = self.app.get('/')  # Make a GET request to the home route
         self.assertEqual(response.status_code, 200)  # Ensure the status code is 200 (OK)
-        self.assertEqual(response.data.decode(), "Welcome to the add_event API!")  # Ensure the response is correct
+        self.assertEqual(response.data.decode(), "Welcome to the add_friend API!")  # Ensure the response is correct
 
 if __name__ == '__main__':
     unittest.main()
