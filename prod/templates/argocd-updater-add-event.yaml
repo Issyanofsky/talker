@@ -5,10 +5,7 @@ metadata:
   namespace: argocd     
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: |
-      addEvent=ecyanofsky/talker-add-event:1.x
-      addFriend=ecyanofsky/talker-add-friend:1.x
-      retriveData=ecyanofsky/talker-retrive-data:1.x
+    argocd-image-updater.argoproj.io/image-list: addEvent=ecyanofsky/talker-add-event:1.x, addFriend=ecyanofsky/talker-add-friend:1.x, retriveData=ecyanofsky/talker-retrive-data:1.x
     argocd-image-updater.argoproj.io/myalias.force-update: "true"
     argocd-image-updater.argoproj.io/addEvent.update-strategy: "semver"
     argocd-image-updater.argoproj.io/addFriend.update-strategy: "semver"
