@@ -19,6 +19,12 @@ DB_NAME = "sec_db"
 DB_USER = "admin"
 DB_PASSWORD = "a1a1a1"
 
+# Basic home route
+@app.route('/')
+def home():
+    return "Welcome to the add_friend API!"  # or render a homepage or documentation page
+
+
 @app.route('/add_friend', methods=['POST'])
 def add_friend():
     try:
