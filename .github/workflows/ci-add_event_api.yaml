@@ -1,4 +1,4 @@
-name: Flask API CI Pipeline
+name: Flask API Add Event CI Pipeline
 
 on:
   push:
