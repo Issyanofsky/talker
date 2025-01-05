@@ -19,6 +19,7 @@ DB_NAME = "sec_db"
 DB_USER = "admin"
 DB_PASSWORD = "a1a1a1"
 
+
 # Basic home route
 @app.route('/')
 def home():
@@ -75,6 +76,7 @@ def add_friend():
     except Exception as e:
         logging.error(f"Unexpected Error: {str(e)}")
         return jsonify({'status': 'error', 'message': 'Failed to add friend'}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5005, debug=True)
