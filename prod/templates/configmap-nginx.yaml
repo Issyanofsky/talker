@@ -38,13 +38,33 @@ data:
     
         server {
             listen 80;  # This listens on port 80 (HTTP)
-            server_name issy.site;  # Default server for handling any requests
+            server_name {{ .Values.ingress.host }};  # Default server for handling any requests
     
             # Serve static files (index.html)
             location / {
                 root /usr/share/nginx/html;  # Path to your index.html (container filesystem)
                 index index.html;  # Default file to serve
                 try_files $uri $uri/ =404;  # Try to find requested files, otherwise show 404
+            }
+
+            # Proxy requests to Prometheus (via /prometheus path)
+            location /prometheus/ {
+                proxy_pass http://prometheus.monitoring.svc.cluster.local:9090/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_redirect off;
+            }
+    
+            # Proxy requests to Grafana (via /grafana path)
+            location /grafana/ {
+                proxy_pass http://grafana.monitoring.svc.cluster.local:3000/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_redirect off;
             }
                            
             # Proxy requests to Flask backend API (Adjust the port as per your Flask app)
