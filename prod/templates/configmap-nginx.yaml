@@ -48,7 +48,7 @@ data:
             }
 
             # Proxy requests to Prometheus (via /prometheus path)
-            location ^~ /prometheus/ {
+            location ^~/prometheus/ {
                 # Remove /prometheus from the URL when forwarding to Prometheus
                 rewrite ^/prometheus(/.*)$ $1 break;
 
