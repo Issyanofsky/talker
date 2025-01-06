@@ -60,6 +60,5 @@ spec:
         backend:
           service:
             name: grafana
-            namespace: monitoring
             port:
               number: 3000  # Grafana port 
