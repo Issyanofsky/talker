@@ -51,7 +51,8 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: prometheus.monitoring.svc.cluster.local
+            name: prometheus
+            namespace: monitoring
             port:
               number: 9090  # Prometheus port  
       # Grafana
@@ -59,6 +60,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: grafana.monitoring.svc.cluster.local
+            name: grafana
+            namespace: monitoring
             port:
               number: 3000  # Grafana port 
