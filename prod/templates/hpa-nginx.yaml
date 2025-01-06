@@ -8,7 +8,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: nginx
+    name: nginx-deployment
   minReplicas: {{ .Values.nginx.hpa.minReplicas }}
   maxReplicas: {{ .Values.nginx.hpa.maxReplicas }}
   targetCPUUtilizationPercentage: {{ .Values.nginx.hpa.targetCPUUtilizationPercentage }}
