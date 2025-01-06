@@ -48,9 +48,12 @@ data:
             }
 
             # Proxy requests to Prometheus (via /prometheus path)
-            location /prometheus/ {
+            location ^~ /prometheus/ {
                 # Remove /prometheus from the URL when forwarding to Prometheus
                 rewrite ^/prometheus(/.*)$ $1 break;
+
+                # Log the rewritten URL
+                access_log /var/log/nginx/prometheus_access.log;
                 
                 proxy_pass http://prometheus.monitoring.svc.cluster.local:9090/;
                 proxy_set_header Host $host;
