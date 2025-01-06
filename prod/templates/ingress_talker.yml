@@ -54,7 +54,7 @@ spec:
             name: prometheus
             namespace: monitoring
             port:
-              number: 9090  # Prometheus port  
+              number: 9090  #  Prometheus port  
       # Grafana
       - path: /grafana/
         pathType: Prefix
