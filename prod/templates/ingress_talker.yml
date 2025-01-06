@@ -47,7 +47,7 @@ spec:
             port:
               number: 5004
       # Prometheus
-      - path: /prometheus
+      - path: /prometheus/
         pathType: Prefix
         backend:
           service:
