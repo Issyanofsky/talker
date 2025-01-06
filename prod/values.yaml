@@ -119,7 +119,7 @@ nginx:
 
 # CD setting for HTML file to load into nfs sever
 gitsynctonfs:
-    schedule: "*/5 * * * *"
+    schedule: "0 */5 * * *"
     git: "https://github.com/Issyanofsky/talker.git"
 
 # Global settings
