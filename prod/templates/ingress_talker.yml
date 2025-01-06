@@ -51,7 +51,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: prometheus-service
+            name: prometheus
             port:
               number: 9090  # Prometheus port 
       # Grafana
@@ -59,6 +59,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: grafana-service
+            name: grafana
             port:
               number: 3000  # Grafana port 
