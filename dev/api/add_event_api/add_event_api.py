@@ -3,6 +3,10 @@ import psycopg2
 from flask_cors import CORS
 
 app = Flask(__name__)
+
+# This ensures /add_friend and /add_friend/ are treated as the same route
+app.url_map.strict_slashes = False
+
 CORS(app)  # This enables CORS for all routes
 
 # Database connection setup
