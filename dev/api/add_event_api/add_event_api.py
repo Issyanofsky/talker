@@ -12,12 +12,6 @@ DB_USER = "admin"
 DB_PASSWORD = "a1a1a1"
 
 
-# Basic home route
-@app.route('/')
-def home():
-    return "Welcome to the add_event API!"  # or render a homepage or documentation page
-
-
 # Route to add an event to the database
 @app.route('/add_event', methods=['POST'])
 def add_event():
