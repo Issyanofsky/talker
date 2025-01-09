@@ -9,6 +9,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
+app.url_map.strict_slashes = False # This ensures /add_friend and /add_friend/ are treated as the same route
+
 # Enable CORS for all routes
 CORS(app)
 
