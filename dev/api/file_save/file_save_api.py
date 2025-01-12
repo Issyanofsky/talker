@@ -12,7 +12,7 @@ CORS(app)  # This enables CORS for all routes
 
 # Folder where the files will be saved
 SAVE_FOLDER = '/app/listner'
-os.makedirs(SAVE_FOLDER, exist_ok=True)
+# os.makedirs(SAVE_FOLDER, exist_ok=True)
 
 
 # Basic home route
