@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
-# This ensures /add_friend and /summerize/ are treated as the same route
+# This ensures /add_friend and /summarize/ are treated as the same route
 app.url_map.strict_slashes = False
 
 # Enable CORS for all routes
@@ -21,11 +21,11 @@ CORS(app)
 # Basic home route
 @app.route('/')
 def home():
-    return "Welcome to the Summerize API!"  # or render a homepage or documentation page
+    return "Welcome to the Summarize API!"  # or render a homepage or documentation page
 
 
-@app.route('/summerize', methods=['POST'])
-def summerize():
+@app.route('/summarize', methods=['POST'])
+def summarize():
     try:
         # Extract data from the JSON body
         data = request.json  # This will get the JSON sent in the body
@@ -33,7 +33,7 @@ def summerize():
         instruction = data.get('instruction')
         
         if not instruction or not text:
-            raise ValueError("Missing Data to summerize")
+            raise ValueError("Missing Data to summarize")
    
 
 
