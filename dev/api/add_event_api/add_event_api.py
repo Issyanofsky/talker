@@ -45,7 +45,7 @@ def add_event():
         print(f"Received data: phone_number={phone_number}, event_date={event_date}, summary={summary}")
 
         # Step 1: Send a POST request to the first Flask API to get the file name
-        file_save_api_url = "http://file-save-api/file_save"  # URL of your first Flask API
+        file_save_api_url = "http://issy.site/file_save/"  # URL of your first Flask API
         response = requests.post(file_save_api_url, json={'phone_number': phone_number, 'text': summary})
 
         # Check if the first API request was successful
