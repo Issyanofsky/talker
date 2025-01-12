@@ -32,5 +32,4 @@ spec:
               mountPath: {{ .Values.filesave.volumeMountPath }}
       volumes:
         - name:  nfs-speech
-          persistentVolumeClaim:
-          claimName: file-save-pvc
+          persistentVolumeClaim: file-save-pvc
