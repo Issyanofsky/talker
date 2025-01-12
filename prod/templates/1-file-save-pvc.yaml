@@ -5,8 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: nfs-file-save-class
+    - {{ .Values.filesave.persistence.volumeClaimTemplate.spec.accessModes }}
+  storageClassName: {{ .Values.filesave.persistence.storageClass }}
   resources:
     requests:
-      storage: {{ .Values.filesave.resources.size }}
+      storage: {{ .Values.filesave.persistence.size }}
