@@ -112,7 +112,7 @@ filesave:
 summarize:
   image: "ecyanofsky/talker-summerize"  
   tag: "1.1"
-  port: 5006
+  port: 5007
   flaskApp: summarize_api.py
 
   replicaCount: 1  # Adjust the number of replicas
