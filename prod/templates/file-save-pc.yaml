@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ .Values.filesave.persistence.storageClass }}
+  storageClassName: nfs-file-save-class
   nfs:
     path: {{ .Values.filesave.persistence.volumeClaimTemplate.volumeMountPath }}
     server:  {{ .Values.filesave.persistence.volumeClaimTemplate.nfsServer }}  #  NFS server address
