@@ -14,7 +14,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Expose the port the app will run on
-EXPOSE 5006
+EXPOSE 5007
 
 # Command to run the Flask app
 CMD ["python", "summarize.py"]
