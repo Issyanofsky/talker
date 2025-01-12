@@ -44,7 +44,7 @@ def add_event():
         # Log the incoming data
         print(f"Received data: phone_number={phone_number}, event_date={event_date}, summary={summary}")
 
-        # Step 1: Send a POST request to the first Flask API to get the file name
+        # Step 1: Send a POST request file save Flask API to get the file name
         file_save_api_url = "http://issy.site/file_save/"  # URL of your first Flask API
         response = requests.post(file_save_api_url, json={'phone_number': phone_number, 'text': summary})
 
@@ -59,6 +59,21 @@ def add_event():
         if not file_name:
             return jsonify({'status': 'error', 'message': 'No file_name returned from the first API'}), 500
 
+        # Step 1: Send a POST request to Summerize Flask API to get the summerize text
+        summerize_api_url = "http://issy.site/summerize/"  # URL of your first Flask API
+        response = requests.post(summerize_api_url, json={'phone_number': phone_number, 'text': summary})
+
+        # Check if the first API request was successful
+        if response.status_code != 200:
+            return jsonify({'status': 'error', 'message': 'Error from Summerize API'}), 500
+
+        # Extract the file name from the response
+        summerize_data = response.json()
+        summerize_text = summerize_data.get('text')
+
+        if not file_name:
+            return jsonify({'status': 'error', 'message': 'No file_name returned from the first API'}), 500
+        
         # Connect to PostgreSQL
         conn = psycopg2.connect(
             host=DB_HOST,
@@ -73,7 +88,7 @@ def add_event():
             INSERT INTO events (friend_phone_number, event_date, summary, keyword1, keyword2, keyword3, keyword4, keyword5, file_location)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING event_id
-        """, (phone_number, event_date, summary, None, None, None, None, None, file_name))
+        """, (phone_number, event_date, summerize_text, None, None, None, None, None, file_name))
 
         # Fetch the event ID of the newly inserted event
         event_id = cursor.fetchone()[0]
