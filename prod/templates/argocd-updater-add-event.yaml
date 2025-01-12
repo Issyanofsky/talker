@@ -6,12 +6,7 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
     # set the images to watch (will increment type 1.x)
-    argocd-image-updater.argoproj.io/image-list: |
-      - addEvent=ecyanofsky/talker-add-event:1.x
-      - addFriend=ecyanofsky/talker-add-friend:1.x
-      - retriveData=ecyanofsky/talker-retrive-data:1.x
-      - filesave=ecyanofsky/talker-file-save:1.x
-      - summarize=ecyanofsky/talker-summerize:1.x
+    argocd-image-updater.argoproj.io/image-list: addEvent=ecyanofsky/talker-add-event:1.x, addFriend=ecyanofsky/talker-add-friend:1.x, retriveData=ecyanofsky/talker-retrive-data:1.x, filesave=ecyanofsky/talker-file-save:1.x, summarize=ecyanofsky/talker-summerize:1.x
     # force update (even if not in the argo App)
     argocd-image-updater.argoproj.io/addEvent.myalias.force-update: "true"
     argocd-image-updater.argoproj.io/addFriend.myalias.force-update: "true"
