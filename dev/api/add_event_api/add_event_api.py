@@ -58,10 +58,11 @@ def add_event():
 
         if not file_name:
             return jsonify({'status': 'error', 'message': 'No file_name returned from the first API'}), 500
-
+        
         # Step 1: Send a POST request to Summerize Flask API to get the summerize text
+        instruction = "you are a profesional salesman. this is a a sale conversation. summerize it in one paragraph"
         summerize_api_url = "http://issy.site/summerize/"  # URL of your first Flask API
-        response = requests.post(summerize_api_url, json={'phone_number': phone_number, 'text': summary})
+        response = requests.post(summerize_api_url, json={'instruction ': instruction , 'text': summary})
 
         # Check if the first API request was successful
         if response.status_code != 200:
