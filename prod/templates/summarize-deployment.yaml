@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: summarize-api-deployment
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: addEvent=ecyanofsky/talker-summerize:1.x
+    argocd-image-updater.argoproj.io/update-strategy: "semver"
+spec:
+  replicas: {{ .Values.summarize.replicaCount }}
+  selector:
+    matchLabels:
+      app: summarize-api
+  template:
+    metadata:
+      labels:
+        app: summarize-api
+    spec:
+      restartPolicy: {{ .Values.summarize.restartPolicy }}
+      containers:
+        - name: summarize-api
+          image: {{ .Values.summarize.image }}:{{ .Values.summarize.tag }}
+          env:
+            - name: FLASK_APP
+              value: {{ .Values.summarize.flaskApp }}
+            - name: FLASK_ENV
+              value: "development"
+          ports:
+            - containerPort: {{ .Values.summarize.port }}
