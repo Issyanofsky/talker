@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: filesave-api
+    app: file-save-api
   ports:
     - protocol: TCP
       port: {{ .Values.filesave.port }}
