@@ -58,7 +58,6 @@ def add_event():
 
         if not file_name:
             return jsonify({'status': 'error', 'message': 'No file_name returned from the first API'}), 500
-
         
         # Connect to PostgreSQL
         conn = psycopg2.connect(
