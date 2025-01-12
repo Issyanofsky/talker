@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: {{ .Values.filesave.persistence.storageClass }}
+  storageClassName: nfs-file-save-class
   resources:
     requests:
       storage: {{ .Values.filesave.persistence.size }}
