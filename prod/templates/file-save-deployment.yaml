@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-save-api-deployment
+  namespace: {{ .Values.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "{{ .Values.filesave.image }}:1.x"
+    argocd-image-updater.argoproj.io/my-app.update-strategy: "semver"
+spec:
+  replicas: {{ .Values.filesave.replicaCount }}
+  selector:
+    matchLabels:
+      app: file-save-api
+  template:
+    metadata:
+      labels:
+        app: file-save-api
+    spec:
+      restartPolicy: {{ .Values.filesave.restartPolicy }}
+      containers:
+        - name: file-save-api
+          image: {{ .Values.filesave.image }}:{{ .Values.filesave.tag }}
+          env:
+            - name: FLASK_APP
+              value: {{ .Values.filesave.flaskApp }}
+            - name: FLASK_ENV
+              value: "development"
+          ports:
+            - containerPort: {{ .Values.filesave.port }}
