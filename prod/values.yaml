@@ -93,7 +93,7 @@ filesave:
   port: 5005
   flaskApp: file_save_api.py
   persistence:
-    volumeMountPath: '/app/listner'
+    volumeMountPath: '/app/speech'
     storageClass: "nfs-file-save-class"
     size: 5Gi
     volumeClaimTemplate:
