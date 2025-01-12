@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: file-save-pvc
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs-file-save-class
+  resources:
+    requests:
+      storage: {{ .Values.filesave.resources.size }}
