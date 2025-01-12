@@ -28,5 +28,9 @@ spec:
           ports:
             - containerPort: {{ .Values.filesave.port }}
           volumeMounts:
-            - name: nginx-html
+            - name: nfs-speech
               mountPath: {{ .Values.nginx.volumeMountPath }}
+      volumes:
+        - name:  nfs-speech
+          persistentVolumeClaim:
+          claimName: speech-pvc
