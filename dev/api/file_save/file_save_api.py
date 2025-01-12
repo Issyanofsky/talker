@@ -21,8 +21,8 @@ def home():
     return "Welcome to the file_save API!"  # or render a homepage or documentation page
 
 
-@app.route('/save_text', methods=['POST'])
-def save_text():
+@app.route('/file_save', methods=['POST'])
+def file_save():
     # Get the phone number and text from the request
     data = request.get_json()
 
