@@ -46,3 +46,10 @@ spec:
             name: add-event-api-service
             port:
               number: 5004
+      - path: /file_save/
+        pathType: Prefix
+        backend:
+          service:
+            name: file-save-api-service
+            port:
+              number: 5004
