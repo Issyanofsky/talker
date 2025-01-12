@@ -31,12 +31,9 @@ def summerize():
         text = data.get('text')
         instruction = data.get('instruction')
         
-        if not data or not text:
+        if not instruction or not text:
             raise ValueError("Missing Data to summerize")
-
-     
-
-      
+   
 
     except ValueError as e:
         logging.error(f"Value Error: {str(e)}")
