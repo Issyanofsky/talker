@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.filesave.persistence.storageClass }}
+provisioner: kubernetes.io/nfs  # NFS provisioner
+parameters:
+  server: {{ .Values.filesave.persistence.volumeClaimTemplate.nfsServer }}  #  NFS server address
+  path:{{ .Values.filesave.persistence.volumeClaimTemplate.volumeMountPath }}  # The NFS path
