@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 import psycopg2
 import requests
 from flask_cors import CORS
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -46,8 +45,8 @@ def add_event():
         print(f"Received data: phone_number={phone_number}, event_date={event_date}, summary={summary}")
 
         # Step 1: Send a POST request to the first Flask API to get the file name
-        file_save_api_url = "http://file-save-api/file_save"  #  URL of your first Flask API
-        response = requests.post(file_save_api_url, json={'phone_number': phone_number, 'text': text})
+        file_save_api_url = "http://file-save-api/file_save"  # URL of your first Flask API
+        response = requests.post(file_save_api_url, json={'phone_number': phone_number, 'text': summary})
 
         # Check if the first API request was successful
         if response.status_code != 200:
