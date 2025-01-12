@@ -5,4 +5,4 @@ metadata:
 provisioner: kubernetes.io/nfs  # NFS provisioner
 parameters:
   server: {{ .Values.filesave.persistence.volumeClaimTemplate.nfsServer }}  #  NFS server address
-  path:{{ .Values.filesave.persistence.volumeClaimTemplate.volumeMountPath }}  # The NFS path
+  path: {{ .Values.filesave.persistence.volumeClaimTemplate.volumeMountPath }}  # The NFS path
