@@ -52,4 +52,4 @@ spec:
           service:
             name: filesave-api-service
             port:
-              number: 5004
+              number: 5006
