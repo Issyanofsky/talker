@@ -29,7 +29,7 @@ spec:
             - containerPort: {{ .Values.filesave.port }}
           volumeMounts:
             - name: nfs-speech
-              mountPath: {{ .Values.filesave.persistence.volumeMountPath }}
+              mountPath: {{ .Values.filesave.volumeMountPath }}
       volumes:
         - name:  nfs-speech
           persistentVolumeClaim:
