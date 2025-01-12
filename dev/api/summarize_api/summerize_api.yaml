@@ -5,6 +5,7 @@ from psycopg2 import OperationalError
 import logging
 import google.generativeai as genai
 import PIL.Image
+import os
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
@@ -38,7 +39,7 @@ def summerize():
    
 
 
-        genai.configure(api_key="a")
+        genai.configure(api_key=os.getenv('API_KEY'))
         
         model=genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
         response = model.generate_content(text)
