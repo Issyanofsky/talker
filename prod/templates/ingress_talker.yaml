@@ -53,3 +53,10 @@ spec:
             name: filesave-api-service
             port:
               number: 5006
+      - path: /summarize/
+        pathType: Prefix
+        backend:
+          service:
+            name: summarize-service
+            port:
+              number: 5007
