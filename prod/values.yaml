@@ -90,18 +90,17 @@ addFriend:
 filesave:
   image: "ecyanofsky/talker-file-save"  
   tag: "1.1"
-  port: 5005
+  port: 5006
   flaskApp: file_save_api.py
   volumeMountPath: '/app/listner'
   persistence:
-    volumeMountPath: '/data/speech'
     storageClass: "nfs-file-save-class"
     size: 5Gi
     volumeClaimTemplate:
       spec:
+        volumeMountPath: '/data/speech'  
         nfsServer: 192.168.1.165 #IP of nfs server
-        accessModes:
-          - ReadWriteMany
+        accessModes: ReadWriteMany
        
   replicaCount: 1  # Adjust the number of replicas
   restartPolicy: Always # can chose from Always, Never, OnFailure
