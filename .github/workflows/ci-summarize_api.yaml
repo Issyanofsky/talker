@@ -38,7 +38,7 @@ jobs:
       # Run Flask API test for add_event_api (ensure the test script is present and correctly written)
       - name: Run Flask API Test for add_friend
         run: |
-          python -m unittest dev/api/summarize/test/test_summarize_api.py
+          python -m unittest dev/api/summarize_api/test/test_summarize_api.py
 
       # Get the latest tag from Docker Hub (fetch tags using the Docker Hub API)
       - name: Get latest Docker image tag
