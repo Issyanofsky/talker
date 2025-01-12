@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
-# This ensures /add_friend and /add_friend/ are treated as the same route
+# This ensures /add_friend and /summerize/ are treated as the same route
 app.url_map.strict_slashes = False
 
 # Enable CORS for all routes
@@ -43,7 +43,8 @@ def summerize():
         
         model=genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
         response = model.generate_content(text)
-        print(response.text)
+        # Return the file name as response
+        return jsonify({'summery': response}), 200
 
     except ValueError as e:
         logging.error(f"Value Error: {str(e)}")
@@ -57,4 +58,4 @@ def summerize():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5005, debug=True)
+    app.run(host='0.0.0.0', port=5006, debug=True)
