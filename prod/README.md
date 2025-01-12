@@ -38,7 +38,7 @@ on a name space - Talker_dev:
     
     - Flask api: the update of the Flask APi are done with [ArgoCD Image Updater](prod/templates/argocd-updater-add-event.yaml) . it checks for any new image on the DockerHub
       repository. if he find new image (with the tag type 1.x) it will pull and deploy it auomaticaly into production.
-[ArgoCD Image Updater](prod/templates/argocd-updater-add-event.yaml)
+[ArgoCD Image Updater](/prod/templates/argocd-updater-add-event.yaml)
       
     - HTML: update the content of the html files that deployed into the nginx servers (its located on a nfs server). the process 
       is done my a CronJob that is schudle to pull any new changes made on the folder nginxhtml on the repsitory.
