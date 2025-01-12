@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the application code into the container
-COPY summarize.py /app/summarize.py
+COPY summarize_api.py /app/summarize_api.py
 
 # Copy the requirements.txt into the container
 COPY requirements.txt /app/requirements.txt
@@ -17,4 +17,4 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 EXPOSE 5007
 
 # Command to run the Flask app
-CMD ["python", "summarize.py"]
+CMD ["python", "summarize_api.py"]
