@@ -110,9 +110,9 @@ filesave:
     targetCPUUtilizationPercentage: 75
 
 summarize:
-  image: "ecyanofsky/talker-add-friend"  
+  image: "ecyanofsky/talker-summerize"  
   tag: "1.1"
-  port: 5005
+  port: 5006
   flaskApp: summarize_api.py
 
   replicaCount: 1  # Adjust the number of replicas
