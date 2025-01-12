@@ -1,5 +1,5 @@
 import unittest
-from dev.api.summerize_api.summerize_api import app  # Import the  add-event_api.py Flask 
+from dev.api.summarize_api.summarize_api import app  # Import the  add-event_api.py Flask 
 
 class FlaskAppTestCase(unittest.TestCase):
     
@@ -12,7 +12,7 @@ class FlaskAppTestCase(unittest.TestCase):
     def test_home(self):
         response = self.app.get('/')  # Make a GET request to the home route
         self.assertEqual(response.status_code, 200)  # Ensure the status code is 200 (OK)
-        self.assertEqual(response.data.decode(), "Welcome to the Retrive API!")  # Ensure the response is correct
+        self.assertEqual(response.data.decode(), "Welcome to the Summarize API!")  # Ensure the response is correct
 
 if __name__ == '__main__':
     unittest.main()
