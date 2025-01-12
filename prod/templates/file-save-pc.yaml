@@ -12,5 +12,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: {{ .Values.filesave.persistence.storageClass }}
   nfs:
-    path: {{ .Values.filesave.persistence.volumeClaimTemplate.spec.volumeMountPath }}
-    server:  {{ .Values.filesave.persistence.volumeClaimTemplate.spec.nfsServer }}  #  NFS server address
+    path: {{ .Values.filesave.persistence.volumeClaimTemplate.volumeMountPath }}
+    server:  {{ .Values.filesave.persistence.volumeClaimTemplate.nfsServer }}  #  NFS server address
