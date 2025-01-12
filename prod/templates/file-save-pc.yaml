@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-filesave-pv
+  namespace: talker-dev
+spec:
+  capacity:
+    storage: {{ .Values.filesave.persistence.size }}
+  volumeMode: Filesystem
+  accessModes:
+    - {{ .Values.filesave.persistence.volumeClaimTemplate.spec.accessModes }}
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: {{ .Values.filesave.persistence.storageClass }}
+  nfs:
+    path: {{ .Values.filesave.persistence.volumeMountPath }}
+    server:  {{ .Values.filesave.persistence.volumeClaimTemplate.spec.nfsServer }}  #  NFS server address
