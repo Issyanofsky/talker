@@ -30,12 +30,13 @@ on a name space - Talker_dev:
             'kubectl port-forward svc/argo-cd-argocd-server 8080:80 -n argocd'
    
             'http://localhost:8080'
+[ArgoCD Image Updater](prod/templates/argocd-updater-add-event.yaml)
    
 ## CD stage:
   
     there are two main updates that can be done:
     
-    - Flask api: the update of the Flask APi are done with [ArgoCD Image updater](prod/templates/argocd-updater-add-event.yaml). it checks for any new image on the DockerHub
+    - Flask api: the update of the Flask APi are done with [ArgoCD Image Updater](prod/templates/argocd-updater-add-event.yaml) . it checks for any new image on the DockerHub
       repository. if he find new image (with the tag type 1.x) it will pull and deploy it auomaticaly into production.
       
     - HTML: update the content of the html files that deployed into the nginx servers (its located on a nfs server). the process 
