@@ -36,7 +36,6 @@ def summarize():
         # connect to goole API
         genai.configure(api_key=os.getenv('GOOGLE_ACCESS_TOKEN'))
 
-
         model=genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
         response = model.generate_content(text)
         # Return the file name as response
