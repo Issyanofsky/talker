@@ -94,15 +94,14 @@ filesave:
   flaskApp: file_save_api.py
   persistence:
     volumeMountPath: '/app/listner'
-    storageClass: "file-save-pv"
+    storageClass: "nfs-file-save-class"
     size: 5Gi
     volumeClaimTemplate:
       spec:
         nfsServer: 192.168.1.165 #IP of nfs server
         accessModes:
           - ReadWriteMany
-    
-        
+       
   replicaCount: 1  # Adjust the number of replicas
   restartPolicy: Always # can chose from Always, Never, OnFailure
   hpa:
