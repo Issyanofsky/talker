@@ -50,6 +50,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: file-save-api-service
+            name: filesave-api-service
             port:
               number: 5004
