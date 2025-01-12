@@ -65,7 +65,7 @@ jobs:
       # Test the Docker image (ensure it works correctly)
       - name: Run Docker container to test image
         run: |
-          docker run -d -p 5005:5005 ecyanofsky/talker-file-save:${{ steps.get_tag.outputs.new_tag }}
+          docker run -d -p 5006:5006 ecyanofsky/talker-file-save:${{ steps.get_tag.outputs.new_tag }}
           sleep 5  # Give it a few seconds to start the Flask app
           curl -f http://localhost:5006/  # Make sure it responds correctly
         continue-on-error: false  # Allow this step to fail if needed
