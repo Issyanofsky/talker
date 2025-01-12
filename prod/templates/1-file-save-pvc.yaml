@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   accessModes:
-    - {{ .Values.filesave.persistence.volumeClaimTemplate.spec.accessModes }}
+    - {{ .Values.filesave.persistence.volumeClaimTemplate.accessModes }}
   storageClassName: {{ .Values.filesave.persistence.storageClass }}
   resources:
     requests:
