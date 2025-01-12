@@ -1,0 +1,16 @@
+{{- if .Values.summarize.hpa.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Release.Name }}-summarize-hpa
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: summarize-api
+  minReplicas: {{ .Values.summarize.hpa.minReplicas }}
+  maxReplicas: {{ .Values.summarize.hpa.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.summarize.hpa.targetCPUUtilizationPercentage }}
+
+{{- end }}
