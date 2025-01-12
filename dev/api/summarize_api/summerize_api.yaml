@@ -3,6 +3,8 @@ from flask_cors import CORS  # Import CORS
 import psycopg2
 from psycopg2 import OperationalError
 import logging
+import google.generativeai as genai
+import PIL.Image
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
@@ -34,6 +36,13 @@ def summerize():
         if not instruction or not text:
             raise ValueError("Missing Data to summerize")
    
+
+
+        genai.configure(api_key="a")
+        
+        model=genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
+        response = model.generate_content(text)
+        print(response.text)
 
     except ValueError as e:
         logging.error(f"Value Error: {str(e)}")
