@@ -8,7 +8,7 @@ spec:
     storage: {{ .Values.filesave.persistence.size }}
   volumeMode: Filesystem
   accessModes:
-    - {{ .Values.filesave.persistence.volumeClaimTemplate.spec.accessModes }}
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: {{ .Values.filesave.persistence.storageClass }}
   nfs:
