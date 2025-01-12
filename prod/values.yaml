@@ -92,6 +92,7 @@ filesave:
   tag: "1.1"
   port: 5005
   flaskApp: file_save_api.py
+  volumeMountPath: /app/listner'
 
   replicaCount: 1  # Adjust the number of replicas
   restartPolicy: Always # can chose from Always, Never, OnFailure
