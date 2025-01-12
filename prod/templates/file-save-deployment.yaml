@@ -27,3 +27,6 @@ spec:
               value: "development"
           ports:
             - containerPort: {{ .Values.filesave.port }}
+          volumeMounts:
+            - name: nginx-html
+              mountPath: {{ .Values.nginx.volumeMountPath }}
