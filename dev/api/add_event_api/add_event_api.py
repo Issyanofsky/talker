@@ -60,8 +60,9 @@ def add_event():
             return jsonify({'status': 'error', 'message': 'No file_name returned from the svaing API'}), 500
 
         # Step 1: Send a POST request to Summerize Flask API to get the summerize text
-        instruction = ( "you are a profesional salesman. this is a sale conversation."
-                       "summerize it in one paragraph and in the same language as the text"
+        instruction = ( 
+            "you are a profesional salesman. this is a sale conversation."
+            "summerize it in one paragraph and in the same language as the text"
         )
         summerize_api_url = "http://issy.site/summarize/"
         response_su = requests.post(summerize_api_url, json={'instruction': instruction, 'text': summary})
