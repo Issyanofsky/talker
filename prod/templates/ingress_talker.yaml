@@ -57,6 +57,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: summarize-service
+            name: summarize-api-service
             port:
               number: 5007
