@@ -1,4 +1,4 @@
-# Summarize
+# <p align="center">**Summarize**</p>
 
 connecting to Gemini API. and pull summarize text with some instruction.
 
