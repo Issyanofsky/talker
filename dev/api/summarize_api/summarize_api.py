@@ -39,7 +39,7 @@ def summarize():
         model = genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
         response = model.generate_content(text)
         # Return the file name as response
-        return jsonify({'summery': response}), 200
+        return response.text, 200
 
     except ValueError as e:
         logging.error(f"Value Error: {str(e)}")
