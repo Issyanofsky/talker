@@ -25,5 +25,10 @@ spec:
               value: {{ .Values.summarize.flaskApp }}
             - name: FLASK_ENV
               value: "development"
+            - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: summerize-secret
+                key: api_key
           ports:
             - containerPort: {{ .Values.summarize.port }}
