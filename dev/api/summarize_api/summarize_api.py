@@ -33,8 +33,8 @@ def summarize():
 
         if not instruction or not text:
             raise ValueError("Missing Data to summarize")
-        # connect to goole API
-        genai.configure(api_key=os.getenv('GOOGLE_ACCESS_TOKEN'))
+        # connect to goole API. the API_KEy is kept in a secret
+        genai.configure(api_key=os.getenv('API_KEY'))
 
         model = genai.GenerativeModel(model_name="gemini-1.5-flash", system_instruction=instruction)
         response = model.generate_content(text)
