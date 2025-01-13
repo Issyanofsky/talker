@@ -28,7 +28,7 @@ spec:
             - name: API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: summerize-secret
+                  name: summarize-secret
                   key: api_key
           ports:
             - containerPort: {{ .Values.summarize.port }}
