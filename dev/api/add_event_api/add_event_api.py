@@ -66,8 +66,12 @@ def add_event():
 
         # Check if the first API request was successful
         if response_su.status_code != 200:
-            return jsonify({'status': 'error', 'message': 'Error from Summerize API'}), 501
-
+            error_details = response_su.json() if response_su.text else {}
+            return jsonify({
+                'status': 'error',
+                'message': 'Error from Summerize API',
+                'details': error_details
+            }), 503
         # Extract the file name from the response
         summerize_data = response_su.json()
         summerize_text = summerize_data.get('text')
