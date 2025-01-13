@@ -16,7 +16,7 @@ testing:
     - checks that the HTTP response code is 200.
     - checks if the response data (the body of the response) matches the expected string (eg."Welcome to the add_event API!").
     - ensures that the Python code follows proper style guidelines (PEP 8).
-    * important: the name of the API cant be changed (the python script)!!.
+    * important: the name of the API and Tag structure (1.x) cant be changed (the python script)!!.
       
   * Image deployment:
     
@@ -24,4 +24,6 @@ testing:
     DOCKER_USERNAME, DOCKER_PASSWORD for DockerHub). the push is done only after a test done to ensure the image works correctly.
     the image get new tag automaticaly by incrementing the tag in type 1.x.
 
-- HTML test - 
+- HTML test - listen to the /dev/htmfile folder. once been pushed it start the test process. the CI/CD process done with:
+    * GitAction - test the html file and push it to the folder /prod/nginxhtml folder.
+    *  CronJob - listen to "push" to folder /prod/nginxhtml it copy the content of the folder to nginx server.
