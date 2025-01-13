@@ -44,21 +44,6 @@ def add_event():
         # Log the incoming data
         print(f"Received data: phone_number={phone_number}, event_date={event_date}, summary={summary}")
 
-        # Step 1: Send a POST request file save Flask API to get the file name
-        file_save_api_url = "http://issy.site/file_save/"  # URL of your first Flask API
-        response = requests.post(file_save_api_url, json={'phone_number': phone_number, 'text': summary})
-
-        # Check if the first API request was successful
-        if response.status_code != 200:
-            return jsonify({'status': 'error', 'message': 'Error from file saving API'}), 500
-
-        # Extract the file name from the response
-        response_data = response.json()
-        file_name = response_data.get('file_name')
-
-        if not file_name:
-            return jsonify({'status': 'error', 'message': 'No file_name returned from the svaing API'}), 500
-
         # Step 1: Send a POST request to Summerize Flask API to get the summerize text
         instruction = "you are a profesional salesman. this is a a sale conversation. summerize it in one paragraph"
         summerize_api_url = "http://issy.site/summarize/"  # URL of your first Flask API
@@ -75,6 +60,21 @@ def add_event():
         # Extract the file name from the response
         summerize_data = response_su.json()
         summerize_text = summerize_data.get('text')
+
+        # Step 1: Send a POST request file save Flask API to get the file name
+        file_save_api_url = "http://issy.site/file_save/"  # URL of your first Flask API
+        response = requests.post(file_save_api_url, json={'phone_number': phone_number, 'text': summary})
+
+        # Check if the first API request was successful
+        if response.status_code != 200:
+            return jsonify({'status': 'error', 'message': 'Error from file saving API'}), 500
+
+        # Extract the file name from the response
+        response_data = response.json()
+        file_name = response_data.get('file_name')
+
+        if not file_name:
+            return jsonify({'status': 'error', 'message': 'No file_name returned from the svaing API'}), 500
 
         if not file_name:
             return jsonify({'status': 'error', 'message': 'No summarize returned from the API'}), 502
