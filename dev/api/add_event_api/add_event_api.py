@@ -57,7 +57,7 @@ def add_event():
         file_name = response_data.get('file_name')
 
         if not file_name:
-            return jsonify({'status': 'error', 'message': 'No file_name returned from the first API'}), 500
+            return jsonify({'status': 'error', 'message': 'No file_name returned from the svaing API'}), 500
 
         # Step 1: Send a POST request to Summerize Flask API to get the summerize text
         instruction = "you are a profesional salesman. this is a a sale conversation. summerize it in one paragraph"
@@ -66,14 +66,14 @@ def add_event():
 
         # Check if the first API request was successful
         if response.status_code != 200:
-            return jsonify({'status': 'error', 'message': 'Error from Summerize API'}), 500
+            return jsonify({'status': 'error', 'message': 'Error from Summerize API'}), 501
 
         # Extract the file name from the response
         summerize_data = response.json()
         summerize_text = summerize_data.get('text')
 
         if not file_name:
-            return jsonify({'status': 'error', 'message': 'No file_name returned from the first API'}), 500
+            return jsonify({'status': 'error', 'message': 'No summarize returned from the API'}), 502
 
         # Connect to PostgreSQL
         conn = psycopg2.connect(
